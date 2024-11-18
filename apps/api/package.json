@@ -2,27 +2,28 @@
   "name": "api",
   "private": true,
   "scripts": {
-    "dev": "concurrently \"pnpm:next\" \"pnpm:stripe\"",
-    "next": "next dev -p 3002",
+    "dev": "concurrently \"pnpm:next\" \"pnpm:stripe\" \"pnpm:ngrok\"",
+    "next": "next dev -p 3002 --turbopack",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
     "analyze": "ANALYZE=true pnpm build",
+    "ngrok": "ngrok http http://localhost:3002",
     "stripe": "stripe listen --forward-to localhost:3002/webhooks/stripe"
   },
   "dependencies": {
-    "@clerk/nextjs": "^6.3.0",
+    "@clerk/nextjs": "^6.3.4",
     "@repo/analytics": "workspace:*",
     "@repo/database": "workspace:*",
     "@repo/design-system": "workspace:*",
     "@repo/env": "workspace:*",
     "@repo/observability": "workspace:*",
-    "@sentry/nextjs": "^8.37.1",
+    "@repo/payments": "workspace:*",
+    "@sentry/nextjs": "^8.38.0",
     "@repo/next-config": "workspace:*",
     "next": "15.0.3",
     "react": "18.3.1",
     "react-dom": "18.3.1",
-    "svix": "^1.39.0"
+    "svix": "^1.40.0"
   },
   "devDependencies": {
     "@repo/typescript-config": "workspace:*",
@@ -30,7 +31,6 @@
     "@types/react": "18.3.12",
     "@types/react-dom": "18.3.1",
     "concurrently": "^9.1.0",
-    "stripe": "^17.3.1",
     "typescript": "^5.6.3"
   }
 }
